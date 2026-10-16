@@ -52,11 +52,11 @@ IDs de tenant e assinatura não são segredos. Segredos (PSK do IPsec, chaves SS
 ### Fase 0: ferramentas (máquina local)
 - [x] Instalar git, gh, az, terraform, kubectl, helm, k3d, docker, KVM/libvirt, VS Code
 - [x] Sair e entrar na sessão (grupos `docker` e `libvirt`) e rodar o bloco de validação
-- [ ] MFA ativado na conta Azure (obrigatório para CLI e IaC com usuário)
+- [x] MFA ativado na conta Azure (obrigatório para CLI e IaC com usuário)
 
 Validação local realizada em 16/10/2026: ferramentas instaladas; daemon Docker e
-libvirt acessíveis; grupos `docker` e `libvirt` ativos. Azure CLI ainda sem login;
-concluir MFA antes de autenticar.
+libvirt acessíveis; grupos `docker` e `libvirt` ativos. Login interativo do Azure
+CLI concluído com o tenant e a assinatura do projeto.
 
 ### Fase 2: repositório (máquina local)
 - [x] `gh repo create plant-hybrid-landing-zone --public --clone --license mit`
