@@ -59,9 +59,15 @@ libvirt acessíveis; grupos `docker` e `libvirt` ativos. Azure CLI ainda sem log
 concluir MFA antes de autenticar.
 
 ### Fase 2: repositório (máquina local)
-- [ ] `gh repo create plant-hybrid-landing-zone --public --clone --license mit`
-- [ ] Estrutura de pastas e `.gitignore` (state, tfvars, .terraform, chaves)
-- [ ] Proteção da `main` (PR obrigatório) e environment `production` com revisor
+- [x] `gh repo create plant-hybrid-landing-zone --public --clone --license mit`
+- [x] Estrutura de pastas e `.gitignore` (state, tfvars, .terraform, chaves)
+- [x] Proteção da `main` (PR obrigatório) e environment `production` com revisor
+
+Repositório criado em https://github.com/akillez01/plant-hybrid-landing-zone
+(público, licença MIT). A branch `main` contém o scaffold inicial; proteção e
+environment `production` configurados: PR obrigatório com uma aprovação,
+revisão obrigatória no environment por `akillez01`, limitado a branches
+protegidas. A revisão própria está habilitada para este laboratório individual.
 
 ### Fase 3: state remoto e OIDC (Cloud Shell, PowerShell)
 - [ ] Redefinir `$SUB`, `$TENANT` e `$REPO = "<usuario-github>/plant-hybrid-landing-zone"`
