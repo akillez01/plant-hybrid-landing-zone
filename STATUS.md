@@ -76,7 +76,7 @@ O PR #1 atualiza este status e aguarda aprovação de outra pessoa.
 - [x] App registration `gh-plant-lz` com três federated credentials (main, pull_request, environment production)
 - [x] Papéis: Contributor na assinatura, Storage Blob Data Contributor no state, Management Group Contributor e Resource Policy Contributor no root MG
 - [x] Em caso de `AuthorizationFailed` no root MG, habilitar temporariamente a opção no Entra e repetir as atribuições
-- [ ] Desativar a elevação de acesso após concluir as atribuições
+- [x] Desativar a elevação de acesso após concluir as atribuições
 - [x] `gh secret set` para AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
 
 Progresso em 16/10/2026: criado `rg-plant-lz-state` em `canadacentral`, com a
@@ -85,8 +85,8 @@ principal e as três credenciais OIDC criados; Contributor na assinatura e
 Storage Blob Data Contributor no state atribuídos; secrets OIDC cadastrados no
 GitHub. Após habilitar temporariamente o acesso elevado no Entra, também foram
 atribuídos Management Group Contributor e Resource Policy Contributor ao root
-MG. Desative agora a elevação no portal Entra ID; os quatro papéis do app OIDC
-devem permanecer atribuídos.
+MG. A elevação temporária foi desativada após as atribuições; os quatro papéis
+do app OIDC permanecem atribuídos.
 
 ### Fase 4: governança em Terraform (`live/00-governance`)
 - [ ] Descobrir o nome exato da initiative CIS no tenant
