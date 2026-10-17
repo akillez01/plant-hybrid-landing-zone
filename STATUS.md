@@ -68,14 +68,24 @@ Repositório criado em https://github.com/akillez01/plant-hybrid-landing-zone
 environment `production` configurados: PR obrigatório com uma aprovação,
 revisão obrigatória no environment por `akillez01`, limitado a branches
 protegidas. A revisão própria está habilitada para este laboratório individual.
+O PR #1 atualiza este status e aguarda aprovação de outra pessoa.
 
 ### Fase 3: state remoto e OIDC (Cloud Shell, PowerShell)
-- [ ] Redefinir `$SUB`, `$TENANT` e `$REPO = "<usuario-github>/plant-hybrid-landing-zone"`
-- [ ] Storage do state em `canadacentral` (container com `--auth-mode key`)
-- [ ] App registration `gh-plant-lz` com três federated credentials (main, pull_request, environment production)
+- [x] Redefinir `$SUB`, `$TENANT` e `$REPO = "akillez01/plant-hybrid-landing-zone"`
+- [x] Storage do state em `canadacentral` (container com `--auth-mode key`)
+- [x] App registration `gh-plant-lz` com três federated credentials (main, pull_request, environment production)
 - [ ] Papéis: Contributor na assinatura, Storage Blob Data Contributor no state, Management Group Contributor e Resource Policy Contributor no root MG
 - [ ] Se o root MG der `AuthorizationFailed`: Entra ID → Propriedades → Gerenciamento de acesso para recursos do Azure → Sim; rodar de novo; desativar depois
-- [ ] `gh secret set` para AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+- [x] `gh secret set` para AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+
+Progresso em 16/10/2026: criado `rg-plant-lz-state` em `canadacentral`, com a
+conta LRS `stplantlz8e922cf2` e o container privado `tfstate`. App/service
+principal e as três credenciais OIDC criados; Contributor na assinatura e
+Storage Blob Data Contributor no state atribuídos; secrets OIDC cadastrados no
+GitHub. A leitura do root Management Group falhou com `AuthorizationFailed`,
+então faltam os dois papéis no root MG. Ative temporariamente a opção indicada
+no item acima no portal Entra ID, avise quando estiver pronta e desative-a após
+concluir as atribuições.
 
 ### Fase 4: governança em Terraform (`live/00-governance`)
 - [ ] Descobrir o nome exato da initiative CIS no tenant
