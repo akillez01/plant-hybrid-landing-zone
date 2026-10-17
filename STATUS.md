@@ -52,29 +52,51 @@ IDs de tenant e assinatura não são segredos. Segredos (PSK do IPsec, chaves SS
 ### Fase 0: ferramentas (máquina local)
 - [x] Instalar git, gh, az, terraform, kubectl, helm, k3d, docker, KVM/libvirt, VS Code
 - [x] Sair e entrar na sessão (grupos `docker` e `libvirt`) e rodar o bloco de validação
-- [ ] MFA ativado na conta Azure (obrigatório para CLI e IaC com usuário)
+- [x] MFA ativado na conta Azure (obrigatório para CLI e IaC com usuário)
 
 Validação local realizada em 16/10/2026: ferramentas instaladas; daemon Docker e
-libvirt acessíveis; grupos `docker` e `libvirt` ativos. Azure CLI ainda sem login;
-concluir MFA antes de autenticar.
+libvirt acessíveis; grupos `docker` e `libvirt` ativos. Login interativo do Azure
+CLI concluído com o tenant e a assinatura do projeto.
 
 ### Fase 2: repositório (máquina local)
-- [ ] `gh repo create plant-hybrid-landing-zone --public --clone --license mit`
-- [ ] Estrutura de pastas e `.gitignore` (state, tfvars, .terraform, chaves)
-- [ ] Proteção da `main` (PR obrigatório) e environment `production` com revisor
+- [x] `gh repo create plant-hybrid-landing-zone --public --clone --license mit`
+- [x] Estrutura de pastas e `.gitignore` (state, tfvars, .terraform, chaves)
+- [x] Proteção da `main` (PR obrigatório) e environment `production` com revisor
+
+Repositório criado em https://github.com/akillez01/plant-hybrid-landing-zone
+(público, licença MIT). A branch `main` contém o scaffold inicial; proteção e
+environment `production` configurados: PR obrigatório sem aprovação exigida
+temporariamente, até haver um revisor independente; revisão do environment por
+`akillez01`, limitada a branches protegidas. A revisão própria está habilitada
+para este laboratório individual. O PR #1 atualiza este status.
 
 ### Fase 3: state remoto e OIDC (Cloud Shell, PowerShell)
-- [ ] Redefinir `$SUB`, `$TENANT` e `$REPO = "<usuario-github>/plant-hybrid-landing-zone"`
-- [ ] Storage do state em `canadacentral` (container com `--auth-mode key`)
-- [ ] App registration `gh-plant-lz` com três federated credentials (main, pull_request, environment production)
-- [ ] Papéis: Contributor na assinatura, Storage Blob Data Contributor no state, Management Group Contributor e Resource Policy Contributor no root MG
-- [ ] Se o root MG der `AuthorizationFailed`: Entra ID → Propriedades → Gerenciamento de acesso para recursos do Azure → Sim; rodar de novo; desativar depois
-- [ ] `gh secret set` para AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+- [x] Redefinir `$SUB`, `$TENANT` e `$REPO = "akillez01/plant-hybrid-landing-zone"`
+- [x] Storage do state em `canadacentral` (container com `--auth-mode key`)
+- [x] App registration `gh-plant-lz` com três federated credentials (main, pull_request, environment production)
+- [x] Papéis: Contributor na assinatura, Storage Blob Data Contributor no state, Management Group Contributor e Resource Policy Contributor no root MG
+- [x] Em caso de `AuthorizationFailed` no root MG, habilitar temporariamente a opção no Entra e repetir as atribuições
+- [x] Desativar a elevação de acesso após concluir as atribuições
+- [x] `gh secret set` para AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+
+Progresso em 16/10/2026: criado `rg-plant-lz-state` em `canadacentral`, com a
+conta LRS `stplantlz8e922cf2` e o container privado `tfstate`. App/service
+principal e as três credenciais OIDC criados; Contributor na assinatura e
+Storage Blob Data Contributor no state atribuídos; secrets OIDC cadastrados no
+GitHub. Após habilitar temporariamente o acesso elevado no Entra, também foram
+atribuídos Management Group Contributor e Resource Policy Contributor ao root
+MG. A elevação temporária foi desativada após as atribuições; os quatro papéis
+do app OIDC permanecem atribuídos.
 
 ### Fase 4: governança em Terraform (`live/00-governance`)
-- [ ] Descobrir o nome exato da initiative CIS no tenant
+- [x] Descobrir o nome exato da initiative CIS no tenant
 - [ ] MG `mg-planta`, policies de regiões, tags obrigatórias (`owner`, `env`, `cost-center`) e CIS em auditoria
 - [ ] Budget `budget-lab` via Terraform; depois apagar o `budget-lab-portal`
+
+Initiative mais recente encontrada para o CIS Azure Foundations: `CIS Azure
+Foundations v3.0.0` (`470a962c-86a0-433b-803a-3c176b5ce79c`, 53 policies).
+Também existe `CIS Microsoft Azure Foundations Benchmark v2.0.0`; a v3.0.0 é a
+versão escolhida para auditoria neste laboratório.
 
 ### Fase 5: pipeline de Terraform
 - [ ] `terraform.yml` com tflint, Checkov, plan comentado no PR, apply com aprovação e detecção diária de drift
