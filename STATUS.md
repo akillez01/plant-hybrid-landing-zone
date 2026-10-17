@@ -89,9 +89,14 @@ MG. A elevação temporária foi desativada após as atribuições; os quatro pa
 do app OIDC permanecem atribuídos.
 
 ### Fase 4: governança em Terraform (`live/00-governance`)
-- [ ] Descobrir o nome exato da initiative CIS no tenant
+- [x] Descobrir o nome exato da initiative CIS no tenant
 - [ ] MG `mg-planta`, policies de regiões, tags obrigatórias (`owner`, `env`, `cost-center`) e CIS em auditoria
 - [ ] Budget `budget-lab` via Terraform; depois apagar o `budget-lab-portal`
+
+Initiative mais recente encontrada para o CIS Azure Foundations: `CIS Azure
+Foundations v3.0.0` (`470a962c-86a0-433b-803a-3c176b5ce79c`, 53 policies).
+Também existe `CIS Microsoft Azure Foundations Benchmark v2.0.0`; a v3.0.0 é a
+versão escolhida para auditoria neste laboratório.
 
 ### Fase 5: pipeline de Terraform
 - [ ] `terraform.yml` com tflint, Checkov, plan comentado no PR, apply com aprovação e detecção diária de drift
