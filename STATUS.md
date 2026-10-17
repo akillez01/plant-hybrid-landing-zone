@@ -65,10 +65,10 @@ CLI concluído com o tenant e a assinatura do projeto.
 
 Repositório criado em https://github.com/akillez01/plant-hybrid-landing-zone
 (público, licença MIT). A branch `main` contém o scaffold inicial; proteção e
-environment `production` configurados: PR obrigatório com uma aprovação,
-revisão obrigatória no environment por `akillez01`, limitado a branches
-protegidas. A revisão própria está habilitada para este laboratório individual.
-O PR #1 atualiza este status e aguarda aprovação de outra pessoa.
+environment `production` configurados: PR obrigatório sem aprovação exigida
+temporariamente, até haver um revisor independente; revisão do environment por
+`akillez01`, limitada a branches protegidas. A revisão própria está habilitada
+para este laboratório individual. O PR #1 atualiza este status.
 
 ### Fase 3: state remoto e OIDC (Cloud Shell, PowerShell)
 - [x] Redefinir `$SUB`, `$TENANT` e `$REPO = "akillez01/plant-hybrid-landing-zone"`
