@@ -86,17 +86,24 @@ Storage Blob Data Contributor no state atribuídos; secrets OIDC cadastrados no
 GitHub. Após habilitar temporariamente o acesso elevado no Entra, também foram
 atribuídos Management Group Contributor e Resource Policy Contributor ao root
 MG. A elevação temporária foi desativada após as atribuições; os quatro papéis
-do app OIDC permanecem atribuídos.
+do app OIDC permanecem atribuídos. O usuário interativo também tem Storage Blob
+Data Contributor no state para executar Terraform localmente.
 
 ### Fase 4: governança em Terraform (`live/00-governance`)
 - [x] Descobrir o nome exato da initiative CIS no tenant
-- [ ] MG `mg-planta`, policies de regiões, tags obrigatórias (`owner`, `env`, `cost-center`) e CIS em auditoria
-- [ ] Budget `budget-lab` via Terraform; depois apagar o `budget-lab-portal`
+- [x] Configuração Terraform para MG `mg-planta`, policies de regiões/tags e CIS em auditoria
+- [x] Configuração Terraform do budget mensal `budget-lab` de US$10
+- [ ] Aplicar a governança e o budget; validar alertas e só então apagar `budget-lab-portal`
 
 Initiative mais recente encontrada para o CIS Azure Foundations: `CIS Azure
 Foundations v3.0.0` (`470a962c-86a0-433b-803a-3c176b5ce79c`, 53 policies).
 Também existe `CIS Microsoft Azure Foundations Benchmark v2.0.0`; a v3.0.0 é a
-versão escolhida para auditoria neste laboratório.
+versão escolhida para auditoria neste laboratório. A configuração está na
+branch `feature/governance-terraform`; `terraform validate` passou e o plano
+com `-refresh=false` propõe 11 criações, sem alterações ou destruições. Nada
+foi aplicado ainda. O plano move a assinatura para `mg-planta` e ativa
+políticas `Deny` de região e tags em recursos e resource groups, portanto deve
+ser revisado antes do apply.
 
 ### Fase 5: pipeline de Terraform
 - [ ] `terraform.yml` com tflint, Checkov, plan comentado no PR, apply com aprovação e detecção diária de drift
