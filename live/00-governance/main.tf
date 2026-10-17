@@ -49,6 +49,23 @@ resource "azurerm_management_group_policy_assignment" "required_tags" {
   depends_on = [azurerm_management_group_subscription_association.subscription]
 }
 
+resource "azurerm_management_group_policy_assignment" "required_tags_on_resource_groups" {
+  for_each = local.required_tags
+
+  name                 = "require-rg-${each.value}"
+  display_name         = "Require tag on resource groups: ${each.value}"
+  description          = "Requires the ${each.value} tag on resource groups."
+  management_group_id  = azurerm_management_group.planta.id
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/96670d01-0a4d-4649-9c89-2d3abc0a5025"
+  parameters = jsonencode({
+    tagName = {
+      value = each.value
+    }
+  })
+
+  depends_on = [azurerm_management_group_subscription_association.subscription]
+}
+
 resource "azurerm_management_group_policy_assignment" "cis_azure_foundations" {
   name                 = "cis-azure-foundations-v3"
   display_name         = "CIS Azure Foundations v3.0.0 - Audit"

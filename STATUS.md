@@ -100,9 +100,10 @@ Foundations v3.0.0` (`470a962c-86a0-433b-803a-3c176b5ce79c`, 53 policies).
 Também existe `CIS Microsoft Azure Foundations Benchmark v2.0.0`; a v3.0.0 é a
 versão escolhida para auditoria neste laboratório. A configuração está na
 branch `feature/governance-terraform`; `terraform validate` passou e o plano
-com `-refresh=false` propõe 8 criações, sem alterações ou destruições. Nada foi
-aplicado ainda. O plano move a assinatura para `mg-planta` e ativa políticas
-`Deny` de região e tags, portanto deve ser revisado antes do apply.
+com `-refresh=false` propõe 11 criações, sem alterações ou destruições. Nada
+foi aplicado ainda. O plano move a assinatura para `mg-planta` e ativa
+políticas `Deny` de região e tags em recursos e resource groups, portanto deve
+ser revisado antes do apply.
 
 ### Fase 5: pipeline de Terraform
 - [ ] `terraform.yml` com tflint, Checkov, plan comentado no PR, apply com aprovação e detecção diária de drift

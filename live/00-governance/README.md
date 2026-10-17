@@ -1,7 +1,8 @@
 # Governança
 
-Root Terraform para `mg-planta`, políticas de localização e tags, CIS Azure
-Foundations v3.0.0 em modo de auditoria e o budget mensal `budget-lab`.
+Root Terraform para `mg-planta`, políticas de localização, tags em recursos e
+resource groups, CIS Azure Foundations v3.0.0 em modo de auditoria e o budget
+mensal `budget-lab`.
 
 O backend remoto usa a conta `stplantlz8e922cf2`, o container `tfstate` e o
 arquivo `governance.tfstate`. Autentique localmente com Azure CLI ou, no GitHub
