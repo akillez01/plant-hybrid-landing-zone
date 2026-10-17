@@ -74,18 +74,19 @@ O PR #1 atualiza este status e aguarda aprovação de outra pessoa.
 - [x] Redefinir `$SUB`, `$TENANT` e `$REPO = "akillez01/plant-hybrid-landing-zone"`
 - [x] Storage do state em `canadacentral` (container com `--auth-mode key`)
 - [x] App registration `gh-plant-lz` com três federated credentials (main, pull_request, environment production)
-- [ ] Papéis: Contributor na assinatura, Storage Blob Data Contributor no state, Management Group Contributor e Resource Policy Contributor no root MG
-- [ ] Se o root MG der `AuthorizationFailed`: Entra ID → Propriedades → Gerenciamento de acesso para recursos do Azure → Sim; rodar de novo; desativar depois
+- [x] Papéis: Contributor na assinatura, Storage Blob Data Contributor no state, Management Group Contributor e Resource Policy Contributor no root MG
+- [x] Em caso de `AuthorizationFailed` no root MG, habilitar temporariamente a opção no Entra e repetir as atribuições
+- [ ] Desativar a elevação de acesso após concluir as atribuições
 - [x] `gh secret set` para AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
 
 Progresso em 16/10/2026: criado `rg-plant-lz-state` em `canadacentral`, com a
 conta LRS `stplantlz8e922cf2` e o container privado `tfstate`. App/service
 principal e as três credenciais OIDC criados; Contributor na assinatura e
 Storage Blob Data Contributor no state atribuídos; secrets OIDC cadastrados no
-GitHub. A leitura do root Management Group falhou com `AuthorizationFailed`,
-então faltam os dois papéis no root MG. Ative temporariamente a opção indicada
-no item acima no portal Entra ID, avise quando estiver pronta e desative-a após
-concluir as atribuições.
+GitHub. Após habilitar temporariamente o acesso elevado no Entra, também foram
+atribuídos Management Group Contributor e Resource Policy Contributor ao root
+MG. Desative agora a elevação no portal Entra ID; os quatro papéis do app OIDC
+devem permanecer atribuídos.
 
 ### Fase 4: governança em Terraform (`live/00-governance`)
 - [ ] Descobrir o nome exato da initiative CIS no tenant
